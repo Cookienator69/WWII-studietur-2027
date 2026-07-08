@@ -1,3 +1,276 @@
+ChatGPT
+
+
+
+
+
+
+Indsatte text(7).txt
+Dokument
+vil du fjerne laboe fra listen, og tilføj en enkelt sætning ved hver lokation, en teaser for hvad man kan opleve?
+
+Til Bastogne vil jeg gerne have lavet et "andre interassante muligheder" og tilføj: 101st Airborne Museum, samt Bastogne War Museum
+- har et link, der kunne være interessant for området
+https://www.liberationroute.com/en/themed-routes/8/around-bastogne
+https://www.liberationroute.com/en/themed-routes
+
+Kunne man sætte link ligeledes ved de andre lokationer, eller vil det blive for "mudret"?
+
+Jeg har bemærket, at ikke alle punkter står de korrekte steder, ved ikke, om det er koordinaterne, der ikke er korrekte, dette må gerne rettes
+
+Jeg retter selve kortfilen: fjerner Laboe, lægger korte teasere på alle stop, opdaterer Bastogne med “andre interessante muligheder”, og retter de tydelige koordinat-fejl. Jeg laver links som små, rolige “Læs mere”-links under hvert stop, så kortet ikke bliver mudret.
+
+Jeg har fundet en håndfuld konkrete koordinater, hvor den gamle version var ret skæv: især La Coupole, John Frost Bridge, Bastogne Barracks, Overloon og Panzer­museum Munster. Laboe ryger helt ud, så søndag bliver Munster + hjemtur.
+
+Tænkte i 2m 12s
+Jeg har lavet en opdateret HTML-version her:
+
+Download opdateret rutekort
+
+Jeg har ændret:
+
+Laboe er fjernet helt fra ruten og fra kortet.
+
+Ruten er nu 21 stop i stedet for 22.
+
+Hver lokation har fået en kort teaser-sætning om, hvad man oplever dér.
+
+Bastogne har fået en separat boks med “Andre interessante muligheder”:
+
+101st Airborne Museum
+
+Bastogne War Museum
+
+Liberation Route – Around Bastogne
+
+Liberation Route – alle temaruter
+
+Jeg har lagt links ind som små “Læs mere” / “Kort”-links under hvert stop, så det ikke bliver for mudret.
+
+Jeg har rettet flere koordinater, bl.a. La Coupole, John Frost Bridge, Airborne Museum St-Mère-Église, Juno Beach Centre, Mémorial de Caen, Bastogne Barracks, Overloon og Deutsches Panzermuseum Munster. Flere af rettelserne er tjekket mod officielle eller praktiske kilder, fx La Coupole GPS-koordinater, Juno Beach Centre GPS, Bastogne Barracks og Bastogne War Museum-adresse/område. 
+
+Jeg tog udgangspunkt i den HTML-fil, du sendte. 
+
+
+
+
+søndag må gerne inkludere flensborg / shopping, ligeledes på vej ned, flensborg / shopping
+
+Jeg lægger Flensborg/shopping ind som et praktisk stop både på udrejse og hjemrejse, uden at gøre det til et militærfagligt punkt. Jeg opdaterer også kilometertal/teksterne, så det ikke står som om ruten springer direkte forbi.
+
+
+
+jeg tror ikke du skal bruge cittimarkt - men tænker Fleggaard
+
+
+kom igen
+
+
+jeg tror ikke du skal bruge cittimarkt - men tænker Fleggaard istedet
+
+Tænkte i 2m 43s
+Ja — Fleggaard giver klart mere mening end Citti her.
+
+Jeg har lavet en ny version med:
+
+Fleggaard Harrislee / Flensborg som stop på vej ned.
+
+Fleggaard Harrislee / Flensborg som stop på hjemturen søndag.
+
+Ruten er nu opdateret til 23 stop.
+
+Søndag hedder nu “Munster + Flensborg + hjemkomst”.
+
+Jeg har lagt det ind som et praktisk shopping-/pausepunkt, ikke som fagligt stop.
+
+Linket går til Fleggaards egen side for Harrislee, som angiver adressen Industrieweg 27, 24955 Harrislee. 
+
+Download den nye version med Fleggaard
+
+Jeg tog stadig udgangspunkt i den HTML-fil, du sendte. 
+
+
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WWII Studierejse – Rutekort</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f4f0; color: #1a1a18; padding: 20px; }
+  h1 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+  .subtitle { font-size: 13px; color: #5f5e5a; margin-bottom: 16px; }
+  .zoom-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; align-items: center; }
+  .zoom-bar span { font-size: 11px; color: #5f5e5a; }
+  .zoom-btn { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; cursor: pointer; border: none; color: #fff; }
+  .map-wrap { border-radius: 10px; overflow: hidden; border: 0.5px solid #d4d3ce; margin-bottom: 16px; }
+  #map { height: 550px; width: 100%; }
+  .hint { font-size: 11px; color: #5f5e5a; margin-bottom: 20px; display: flex; align-items: center; gap: 5px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .col { display: flex; flex-direction: column; gap: 12px; }
+  .card { background: #fff; border-radius: 10px; border: 0.5px solid #d4d3ce; overflow: hidden; }
+  .card-day { font-size: 10px; font-weight: 500; color: rgba(255,255,255,0.65); }
+  .card-title { font-size: 13px; font-weight: 500; color: #fff; margin-top: 1px; }
+  .card-sub { font-size: 11px; color: rgba(255,255,255,0.78); }
+  .card-body { padding: 10px 12px 2px; }
+  .stop-row { display: flex; align-items: flex-start; gap: 8px; padding-bottom: 11px; }
+  .stop-num { border-radius: 50%; min-width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; flex-shrink: 0; margin-top: 2px; color: #fff; }
+  .stop-name { font-size: 12px; font-weight: 500; line-height: 1.3; cursor: pointer; text-underline-offset: 2px; text-decoration: underline; }
+  .stop-desc { font-size: 11px; color: #5f5e5a; line-height: 1.35; margin-top: 1px; }
+  .stop-teaser { font-size: 11px; color: #343330; line-height: 1.38; margin-top: 3px; }
+  .stop-links { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 5px; }
+  .stop-links a { font-size: 10.5px; color: #185FA5; text-decoration: none; border-bottom: 1px solid #185FA555; }
+  .warn-box { margin: 0 12px 10px; padding: 7px 10px; border-radius: 6px; background: #faeeda; border-left: 3px solid #ba7517; font-size: 11px; color: #854f0b; line-height: 1.45; }
+  .extra-box { margin: 0 12px 10px; padding: 8px 10px; border-radius: 6px; background: #eef6f3; border-left: 3px solid #0F6E56; }
+  .extra-title { font-size: 11px; font-weight: 700; color: #0F6E56; margin-bottom: 5px; }
+  .extra-item { font-size: 11px; color: #343330; line-height: 1.4; margin: 5px 0; }
+  .extra-item a { color: #0F6E56; font-weight: 600; text-decoration: none; border-bottom: 1px solid #0F6E5655; }
+  .card-footer { padding: 6px 12px 8px; border-top: 0.5px solid #d4d3ce; background: #f9f8f6; display: flex; align-items: flex-start; gap: 6px; }
+  .card-footer i { font-size: 13px; color: #5f5e5a; margin-top: 1px; }
+  .card-footer span { font-size: 11px; color: #5f5e5a; line-height: 1.4; }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } #map { height: 380px; } }
+</style>
+</head>
+<body>
+<h1>WWII Studierejse – Rutekort</h1>
+<p class="subtitle">Lørdag til søndag ugen efter · 23 stop · 9 dage · Skive → Flensborg → Normandiet → Belgien → Holland → Nordtyskland → Flensborg → Skive</p>
+<div class="zoom-bar">
+  <span>Zoom til:</span>
+  <button class="zoom-btn" style="background:#5F5E5A" onclick="zoomRegion('all')">Hele ruten</button>
+  <button class="zoom-btn" style="background:#185FA5" onclick="zoomRegion('normandy')">Normandiet (7–17)</button>
+  <button class="zoom-btn" style="background:#0F6E56" onclick="zoomRegion('bastogne')">Bastogne (18)</button>
+  <button class="zoom-btn" style="background:#0F6E56" onclick="zoomRegion('holland')">Holland (19–20)</button>
+  <button class="zoom-btn" style="background:#993C1D" onclick="zoomRegion('germany')">Nordtyskland (22–23)</button>
+</div>
+<div class="map-wrap"><div id="map"></div></div>
+<p class="hint"><i class="ti ti-hand-click" style="font-size:14px;"></i> Klik på et lokationsnavn for at springe til stedet på kortet</p>
+<div class="grid">
+  <div class="col" id="col-a"></div>
+  <div class="col" id="col-b"></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+const COLORS={1:'#5F5E5A',2:'#534AB7',3:'#185FA5',4:'#185FA5',5:'#185FA5',6:'#185FA5',7:'#BA7517',8:'#0F6E56',9:'#993C1D'};
+const STOPS=[{"n": 1, "day": 1, "lat": 56.567, "lng": 9.033, "name": "Skive Kaserne", "meta": "Afgang morgen", "teaser": "Startpunktet sætter rammen for rejsen: fra dansk kaserne til Europas kamppladser.", "links": [["Kort", "https://www.openstreetmap.org/?mlat=56.567&mlon=9.033#map=15/56.567/9.033"]]}, {"n": 2, "day": 1, "lat": 55.491, "lng": 9.472, "name": "Kolding – opsamling", "meta": "Mødested", "teaser": "Praktisk opsamlingspunkt før den lange sydgående transport gennem Europa.", "links": [["Kort", "https://www.openstreetmap.org/?mlat=55.491&mlon=9.472#map=13/55.491/9.472"]]}, {"n": 3, "day": 1, "lat": 54.79033, "lng": 9.39093, "name": "Fleggaard Harrislee – grænsehandel", "meta": "Praktisk shopping-/pausepunkt ved Flensborg på vej ned", "teaser": "Et lavpraktisk stop til proviant, drikkevarer og benstræk før den lange tur videre mod Holland.", "links": [["Læs mere", "https://www.fleggaard.dk/da-dk/fleggaard-harrislee"], ["Kort", "https://www.openstreetmap.org/?mlat=54.79033&mlon=9.39093#map=16/54.79033/9.39093"]]}, {"n": 4, "day": 1, "lat": 51.84936, "lng": 5.87288, "name": "Nijmegen-broen (Waalbrug)", "meta": "45 min – den amerikanske bro taget 20. sep. 1944", "teaser": "Her bliver Market Garden konkret: en bro, en flodkrydsning og prisen for tempo i en offensiv.", "links": [["Kort", "https://www.openstreetmap.org/?mlat=51.84936&mlon=5.87288#map=16/51.84936/5.87288"], ["Læs mere", "https://www.liberationroute.com/en"]]}, {"n": 5, "day": 1, "lat": 51.97472, "lng": 5.91194, "name": "Arnhem-broen (John Frost Bridge)", "meta": "45 min – “a bridge too far” · briterne holdt i 4 dage", "teaser": "Et af de mest ikoniske steder fra Market Garden, hvor mod, afstande og logistik ramte hårdt sammen.", "links": [["Kort", "https://www.openstreetmap.org/?mlat=51.97472&mlon=5.91194#map=16/51.97472/5.91194"], ["Læs mere", "https://www.liberationroute.com/en"]]}, {"n": 6, "day": 1, "lat": 51.842, "lng": 5.853, "name": "Nijmegen – overnatning", "meta": "Lang transportdag inkl. Flensborg, begge broer og overnatning", "teaser": "En rolig base efter første dag, tæt på Waal, broerne og Market Garden-fortællingen.", "links": [["Kort", "https://www.openstreetmap.org/?mlat=51.842&mlon=5.853#map=13/51.842/5.853"]]}, {"n": 7, "day": 2, "lat": 50.698446, "lng": 2.243514, "name": "La Coupole, Wizernes", "meta": "2,5t – V2-raketbunker · 260 km fra Nijmegen", "teaser": "En enorm bunker, hvor nazistisk våbenteknologi, tvangsarbejde og terrorbombning bindes sammen.", "links": [["Læs mere", "https://lacoupole-france.com/en/"]]}, {"n": 8, "day": 2, "lat": 49.208, "lng": -0.39, "name": "Brit Hotel Caen Nord – Mémorial", "meta": "Base i Normandiet (søndag–fredag, 5 nætter) · 280 km fra La Coupole", "teaser": "Basen ligger strategisk godt for både vestlige, centrale og østlige D-dagslokationer.", "links": [["Kort", "https://www.openstreetmap.org/?mlat=49.208&mlon=-0.390#map=15/49.208/-0.390"]]}, {"n": 9, "day": 3, "lat": 49.408249, "lng": -1.314964, "name": "Airborne Museum, St-Mère-Église", "meta": "2,5t – 80 km fra Caen", "teaser": "Et stærkt sted for luftlandsætningerne, faldskærmstropperne og de små enheders initiativ på D-dag.", "links": [["Læs mere", "https://www.airborne-museum.org/en/"]]}, {"n": 10, "day": 3, "lat": 49.384, "lng": -1.24, "name": "Easy Co. & Maj. Winters memorial", "meta": "45 min – 10 km", "teaser": "Et kort, men godt stop om ledelse, small-unit tactics og Easy Companys rolle omkring Brécourt.", "links": [["Kort", "https://www.openstreetmap.org/?mlat=49.384&mlon=-1.240#map=15/49.384/-1.240"]]}, {"n": 11, "day": 3, "lat": 49.302, "lng": -1.244, "name": "Normandy Victory Museum, Carentan", "meta": "2t – 15 km", "teaser": "Museet giver en jordnær forståelse af hedgerow-kampene og hvorfor Carentan var operationelt vigtig.", "links": [["Læs mere", "https://normandy-victory-museum.fr/en/"]]}, {"n": 12, "day": 4, "lat": 49.359, "lng": -0.855, "name": "Omaha Beach + Colleville kirkegård", "meta": "3,5t – 35 km fra Caen", "teaser": "Et af turens mest alvorlige stop: strand, terræn og kirkegård viser både taktisk modstand og menneskelige tab.", "links": [["Læs mere", "https://www.abmc.gov/Normandy"]]}, {"n": 13, "day": 5, "lat": 49.3908, "lng": -0.9867, "name": "Pointe du Hoc", "meta": "1,5t – 45 km fra Caen", "teaser": "Klipper, kratere og bunkere gør Atlantvoldens betydning fysisk tydelig på få minutter.", "links": [["Læs mere", "https://www.abmc.gov/Pointe-du-Hoc"]]}, {"n": 14, "day": 5, "lat": 49.3402, "lng": -0.620916, "name": "Musée du Débarquement, Arromanches", "meta": "2t – 30 km", "teaser": "Her bliver logistikken bag Overlord synlig gennem Mulberry-havnen og forsyningsapparatet efter landgangen.", "links": [["Læs mere", "https://musee-arromanches.fr/en/"]]}, {"n": 15, "day": 5, "lat": 49.33653, "lng": -0.46181, "name": "Centre Juno Beach, Courseulles", "meta": "2t – 25 km", "teaser": "Et vigtigt korrektiv til den klassiske fortælling: Normandiet var også canadisk og Commonwealth-historie.", "links": [["Læs mere", "https://www.junobeach.org/"]]}, {"n": 16, "day": 6, "lat": 49.2423, "lng": -0.2717, "name": "Mémorial Pegasus", "meta": "2t – 15 km fra Caen", "teaser": "Broerne ved Orne-kanalen viser, hvordan østflanken blev sikret allerede før strandlandingerne.", "links": [["Læs mere", "https://musee.memorial-pegasus.com/en/"]]}, {"n": 17, "day": 6, "lat": 49.272, "lng": -0.196, "name": "Merville Battery", "meta": "1,5t – 10 km", "teaser": "Et kompakt stop om luftbårne angreb, usikker efterretning og neutralisering af kystartilleri.", "links": [["Læs mere", "https://www.batterie-merville.com/en/"]]}, {"n": 18, "day": 6, "lat": 49.197438, "lng": -0.384135, "name": "Mémorial de Caen", "meta": "3t – eftermiddag · sidste dag i Caen", "teaser": "Museet samler krigens større linjer og giver perspektiv på hvorfor invasionen blev nødvendig.", "links": [["Læs mere", "https://www.memorial-caen.com/"]]}, {"n": 19, "day": 7, "lat": 50.00957, "lng": 5.718956, "name": "Bastogne Barracks", "meta": "2,5t – 500 km fra Caen · afgang ~08:00", "teaser": "Et centralt stop for Ardenneroffensiven, forsvarskampen om Bastogne og 101st Airborne-fortællingen.", "links": [["Læs mere", "https://bastognebarracks.be/"], ["Rute i området", "https://www.liberationroute.com/en/themed-routes/8/around-bastogne"]]}, {"n": 20, "day": 8, "lat": 51.570579, "lng": 5.956622, "name": "Overloon War Museum", "meta": "2t – 180 km fra Bastogne", "teaser": "Et stort og meget visuelt museum, hvor krigens materiel og civile konsekvenser står side om side.", "links": [["Læs mere", "https://www.oorlogsmuseum.nl/en/"]]}, {"n": 21, "day": 8, "lat": 51.9872, "lng": 5.8433, "name": "Airborne Museum Hartenstein, Arnhem", "meta": "2,5t – 60 km fra Overloon · overnatning Arnhem", "teaser": "Den tidligere britiske hovedkvartersbygning fortæller Arnhem-slaget indefra, ikke kun som bro-myte.", "links": [["Læs mere", "https://www.airbornemuseum.nl/en/"]]}, {"n": 22, "day": 9, "lat": 52.9859, "lng": 10.0898, "name": "Deutsches Panzermuseum, Munster", "meta": "2t – ca. 200 km fra Arnhem · videre mod Flensborg og Skive", "teaser": "Et oplagt fagligt stop om panser, doktrin, teknologi og hvordan kampkøretøjer formede moderne landkrig.", "links": [["Læs mere", "https://daspanzermuseum.de/"]]}, {"n": 23, "day": 9, "lat": 54.79033, "lng": 9.39093, "name": "Fleggaard Harrislee – grænsehandel", "meta": "Shopping-/pausepunkt ved Flensborg på hjemturen", "teaser": "Et oplagt sidste stop til grænsehandel og en praktisk pause, inden turen går det sidste stykke mod Skive.", "links": [["Læs mere", "https://www.fleggaard.dk/da-dk/fleggaard-harrislee"], ["Kort", "https://www.openstreetmap.org/?mlat=54.79033&mlon=9.39093#map=16/54.79033/9.39093"]]}];
+const DAYS=[{"d": 1, "label": "Lørdag", "title": "Udrejse + Flensborg + begge broer", "sub": "Skive → Kolding → Fleggaard Harrislee → Nijmegen/Arnhem", "over": "Nijmegen · ca. 670 km / lang transportdag inkl. shopping og broer", "stops": [1, 2, 3, 4, 5, 6], "warn": "Grænsehandel kan holdes som kort, praktisk stop; ellers æder det hurtigt af tiden ved broerne i Holland."}, {"d": 2, "label": "Søndag", "title": "La Coupole → Caen", "sub": "Nordfrankrig og ankomst Caen", "over": "Brit Hotel Caen Nord – Mémorial · ca. 540 km / ~7,5t", "stops": [7, 8], "warn": null}, {"d": 3, "label": "Mandag", "title": "Cotentin-halvøen", "sub": "St-Mère-Église, Easy Co., Carentan", "over": "Brit Hotel Caen Nord · 155 km / ~7t", "stops": [9, 10, 11], "warn": null}, {"d": 4, "label": "Tirsdag", "title": "Omaha Beach", "sub": "Omaha Beach + Colleville amerikanske kirkegård", "over": "Brit Hotel Caen Nord · 70 km / ~5t", "stops": [12], "warn": null}, {"d": 5, "label": "Onsdag", "title": "Invasionskysten", "sub": "Pointe du Hoc, Arromanches, Juno Beach", "over": "Brit Hotel Caen Nord · 125 km / ~7t", "stops": [13, 14, 15], "warn": null}, {"d": 6, "label": "Torsdag", "title": "Østflanken + Mémorial de Caen", "sub": "Pegasus, Merville · Mémorial de Caen eftermiddag", "over": "Brit Hotel Caen Nord · 55 km / ~8t", "stops": [16, 17, 18], "warn": null}, {"d": 7, "label": "Fredag", "title": "Afrejse → Belgien", "sub": "Caen → Bastogne Barracks · afgang ~08:00", "over": "Bastogne · 500 km / ~7,5t inkl. besøg", "stops": [19], "warn": "Lang køredag. Afgang Caen ~08:00 – ankomst Bastogne ~13:00 – besøg 2,5t – overnatning.", "extras": [{"title": "Andre interessante muligheder i Bastogne", "items": [["101st Airborne Museum", "https://101airbornemuseumbastogne.com/en/", "Et mere fokuseret museum om 101st Airborne og kampene i og omkring Bastogne."], ["Bastogne War Museum", "https://www.bastognewarmuseum.be/en/home-en/", "Større og mere moderne formidling af Ardenneroffensiven og Battle of the Bulge."], ["Liberation Route – Around Bastogne", "https://www.liberationroute.com/en/themed-routes/8/around-bastogne", "Temarute med steder og historier rundt om Bastogne."], ["Liberation Route – alle temaruter", "https://www.liberationroute.com/en/themed-routes", "God til at finde ekstra stop, hvis programmet skal justeres."]]}]}, {"d": 8, "label": "Lørdag", "title": "Holland", "sub": "Overloon og Hartenstein/Arnhem", "over": "Arnhem · 240 km / ~6t inkl. besøg", "stops": [20, 21], "warn": null}, {"d": 9, "label": "Søndag", "title": "Munster + Flensborg + hjemkomst", "sub": "Munster → Fleggaard Harrislee → Skive", "over": "Ankomst Skive Kaserne – søndag aften · ca. 580 km / ~7–8t efter museumsbesøg og shoppingpause", "stops": [22, 23], "warn": "Hjemrejsedag med fagligt stop i Munster og praktisk grænsehandel ved Flensborg. Shopping bør tidsstyres, hvis I vil lande rimeligt i Skive."}];
+const REGIONS={
+  all: STOPS.map(s=>[s.lat,s.lng]),
+  normandy: STOPS.filter(s=>s.n>=8&&s.n<=18).map(s=>[s.lat,s.lng]),
+  bastogne: STOPS.filter(s=>s.n===19).map(s=>[s.lat,s.lng]),
+  holland: STOPS.filter(s=>s.n>=20&&s.n<=21).map(s=>[s.lat,s.lng]),
+  germany: STOPS.filter(s=>s.n>=22).map(s=>[s.lat,s.lng]),
+};
+const REGION_PAD={all:0.07,normandy:0.1,bastogne:0.25,holland:0.2,germany:0.25};
+const map=L.map('map',{scrollWheelZoom:true});
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'© OpenStreetMap contributors'}).addTo(map);
+const routePts=[
+  [56.567,9.033],
+  [55.491,9.472],
+  [54.79033,9.39093],
+  [51.84936,5.87288],
+  [51.97472,5.91194],
+  [51.842,5.853],
+  [50.698446,2.243514],
+  [49.208,-0.39],
+  [49.408249,-1.314964],
+  [49.384,-1.24],
+  [49.302,-1.244],
+  [49.208,-0.39],
+  [49.359,-0.855],
+  [49.208,-0.39],
+  [49.3908,-0.9867],
+  [49.3402,-0.620916],
+  [49.33653,-0.46181],
+  [49.208,-0.39],
+  [49.2423,-0.2717],
+  [49.272,-0.196],
+  [49.197438,-0.384135],
+  [50.00957,5.718956],
+  [51.570579,5.956622],
+  [51.9872,5.8433],
+  [52.9859,10.0898],
+  [54.79033,9.39093],
+  [56.567,9.033]
+];
+L.polyline(routePts,{color:'#888780',weight:2,dashArray:'7,5',opacity:0.6}).addTo(map);
+const markers={};
+const sm=Object.fromEntries(STOPS.map(s=>[s.n,s]));
+function renderLinks(links){
+  if(!links || !links.length) return '';
+  return '<div class="stop-links">'+links.map(([label,url])=>'<a href="'+url+'" target="_blank" rel="noopener">'+label+'</a>').join('')+'</div>';
+}
+STOPS.forEach(s=>{
+  const c=COLORS[s.day];
+  const icon=L.divIcon({
+    html:'<div style="background:'+c+';width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;border:2px solid rgba(255,255,255,0.9);">'+s.n+'</div>',
+    className:'',iconSize:[26,26],iconAnchor:[13,13],popupAnchor:[0,-16]
+  });
+  const m=L.marker([s.lat,s.lng],{icon}).addTo(map);
+  m.bindPopup('<b>Stop '+s.n+': '+s.name+'</b><br><span style="font-size:11px;">'+s.meta+'</span><br><span style="font-size:11px;">'+s.teaser+'</span>'+renderLinks(s.links));
+  markers[s.n]=m;
+});
+const leg=L.control({position:'bottomleft'});
+leg.onAdd=()=>{
+  const d=L.DomUtil.create('div');
+  d.style.cssText='background:rgba(255,255,255,0.96);padding:10px 12px;border-radius:8px;font-size:12px;line-height:2;font-family:sans-serif;border:1px solid rgba(0,0,0,0.1);';
+  const e=[[1,'Lørdag – Flensborg / broer'],[2,'Søndag – La Coupole / Caen'],[3,'Man–tors – Normandiet'],[7,'Fredag – Belgien'],[8,'Lørdag – Holland'],[9,'Søndag – Munster / Flensborg / hjem']];
+  d.innerHTML=e.map(([day,lbl])=>'<div><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:'+COLORS[day]+';vertical-align:middle;margin-right:7px;"></span>'+lbl+'</div>').join('');
+  return d;
+};
+leg.addTo(map);
+function zoomRegion(r){map.fitBounds(L.latLngBounds(REGIONS[r]).pad(REGION_PAD[r]));}
+zoomRegion('all');
+function flyToStop(n){
+  const s=sm[n];
+  map.setView([s.lat,s.lng],13,{animate:true,duration:0.8});
+  setTimeout(()=>markers[n].openPopup(),850);
+  document.getElementById('map').scrollIntoView({behavior:'smooth',block:'center'});
+}
+function extraHtml(day){
+  if(!day.extras) return '';
+  return day.extras.map(box=>'<div class="extra-box"><div class="extra-title">'+box.title+'</div>'+
+    box.items.map(([name,url,txt])=>'<div class="extra-item"><a href="'+url+'" target="_blank" rel="noopener">'+name+'</a> – '+txt+'</div>').join('')+
+    '</div>').join('');
+}
+const colA=document.getElementById('col-a');
+const colB=document.getElementById('col-b');
+DAYS.forEach((day,i)=>{
+  const col=i<5?colA:colB;
+  const c=COLORS[day.d];
+  const items=day.stops.map(n=>{
+    const s=sm[n];
+    return '<div class="stop-row">'+
+      '<span class="stop-num" style="background:'+c+';">'+n+'</span>'+
+      '<div>'+
+        '<div class="stop-name" style="color:'+c+';text-decoration-color:'+c+'55;" onclick="flyToStop('+n+')">'+s.name+'</div>'+
+        '<div class="stop-desc">'+s.meta+'</div>'+
+        '<div class="stop-teaser">'+s.teaser+'</div>'+
+        renderLinks(s.links)+
+      '</div></div>';
+  }).join('');
+  const warnHtml=day.warn?'<div class="warn-box"><i class="ti ti-alert-triangle" style="font-size:12px;vertical-align:-1px;margin-right:4px;"></i>'+day.warn+'</div>':'';
+  const card=document.createElement('div');
+  card.className='card';
+  card.innerHTML=
+    '<div style="background:'+c+';padding:9px 12px;">'+
+      '<div class="card-day">'+day.label+'</div>'+
+      '<div class="card-title">'+day.title+'</div>'+
+      '<div class="card-sub">'+day.sub+'</div>'+
+    '</div>'+
+    '<div class="card-body">'+items+'</div>'+
+    warnHtml+
+    extraHtml(day)+
+    '<div class="card-footer"><i class="ti ti-bed"></i><span>'+day.over+'</span></div>';
+  col.appendChild(card);
+});
+</script>
+</body>
+</html>
+Det er så fint, ved ikke om jeg skal have html for at kunne dele den?
+
 <!DOCTYPE html>
 <html lang="da">
 <head>
